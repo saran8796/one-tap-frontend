@@ -55,7 +55,7 @@ export default function AuthForm() {
     try {
       // Register new user
       const registerRes = await fetch(
-        "http://localhost:5000/api/users/register",
+        "https://one-tap-backend.vercel.app/api/users/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -78,11 +78,14 @@ export default function AuthForm() {
       }
 
       // Send OTP email
-      const otpRes = await fetch("http://localhost:5000/api/users/send-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, mobile }),
-      });
+      const otpRes = await fetch(
+        "https://one-tap-backend.vercel.app/api/users/send-otp",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, mobile }),
+        }
+      );
       const otpData = await otpRes.json();
 
       if (otpRes.ok) {
@@ -104,11 +107,14 @@ export default function AuthForm() {
     setMessage("Signing in...");
 
     try {
-      const res = await fetch("http://localhost:5000/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, role: loginRole }),
-      });
+      const res = await fetch(
+        "https://one-tap-backend.vercel.app/api/users/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password, role: loginRole }),
+        }
+      );
 
       console.log("Logging in with", { email, password, role: loginRole });
 
@@ -165,11 +171,14 @@ export default function AuthForm() {
     setMessage("Verifying OTP...");
 
     try {
-      const res = await fetch("http://localhost:5000/api/users/verify-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, otp }),
-      });
+      const res = await fetch(
+        "https://one-tap-backend.vercel.app/api/users/verify-otp",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, otp }),
+        }
+      );
 
       const data = await res.json();
       if (res.ok) {
